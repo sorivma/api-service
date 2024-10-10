@@ -52,6 +52,10 @@ class JpaTransactionService(
         return transactionRepository.getTransactionsByPayeeId(userId, pageable).map { it.toDTO() }
     }
 
+    override fun getAnyTransactions(userId: UUID, pageable: Pageable): Page<TransactionDTO> {
+        return transactionRepository.getAnyTransaction(userId, pageable).map { it.toDTO() }
+    }
+
     companion object {
         private val DEFAULT_TRANSACTION_STATUS = TransactionStatus.PENDING
         private const val ENTITY = "Transaction"

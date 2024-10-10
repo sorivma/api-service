@@ -1,0 +1,60 @@
+input Pageable {
+    page: Int!
+    size: Int!
+}
+
+type Query {
+    user(userId: String!): UserAggregate
+    users(page: Pageable): [UserAggregate]
+}
+
+type UserAggregate {
+    id: ID!
+    name: String!
+    email: String!
+    transactions(page: Pageable, paymentType: PaymentType): [Transaction]
+    account: Account
+}
+
+type Transaction {
+    id: ID!
+    amount: Float!
+    status: TransactionStatus
+    payerId: String!
+    payeeId: String!
+    paymentMethod: PaymentMethod!
+}
+
+type Account {
+    userId: String!
+    balance: Float!
+    status: AccountStatus!
+    accountType: AccountType!
+    currencyCode: String!
+}
+
+enum TransactionStatus {
+    PENDING
+    COMPLETED
+}
+
+enum AccountStatus {
+    ACTIVE
+    INACTIVE
+}
+
+enum AccountType {
+    SAVINGS
+    CHECKING
+}
+
+enum PaymentMethod {
+    CREDIT_CARD
+    BANK_TRANSFER
+    PAYPAL
+}
+
+enum PaymentType {
+    INCOMING,
+    OUTCOMING
+}

@@ -17,7 +17,12 @@ java {
 
 repositories {
     mavenCentral()
+}
 
+dependencyManagement {
+    imports {
+        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release")
+    }
 }
 
 dependencies {
@@ -33,6 +38,8 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.2")
 
     implementation("net.datafaker:datafaker:1.5.0")
+
+    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

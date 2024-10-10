@@ -14,7 +14,7 @@ open class JpaServiceException(
     class NoEntityWithId(
         message: String? = null,
         cause: Throwable? = null,
-        val entity: String,
+        val entity: String?,
         val id: String
         ) : JpaServiceException(message, cause)
 
@@ -27,6 +27,14 @@ open class JpaServiceException(
             )
         }
 
+        fun <I> noEntityWithId(id: I): NoEntityWithId {
+            return NoEntityWithId(
+                "No entity with specified id [$id]",
+                entity = null,
+                id = id.toString()
+            )
+        }
+
         fun default(message: String? = null, cause: Throwable? = null): JpaServiceException {
             return JpaServiceException(message, cause)
         }
@@ -34,5 +42,6 @@ open class JpaServiceException(
 
     object ExceptionExtensions {
         fun <I, T> Optional<T>.requiredEntity(id: I, entity: String): T = this.requiredValue(noEntityWithId(id, entity))
+        fun <I, T> Optional<T>.requiredEntity(id: I): T = this.requiredValue(noEntityWithId(id))
     }
 }

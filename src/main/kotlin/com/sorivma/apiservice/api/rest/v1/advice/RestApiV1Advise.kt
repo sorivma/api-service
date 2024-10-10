@@ -1,5 +1,6 @@
 package com.sorivma.apiservice.api.rest.v1.advice
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.sorivma.apiservice.core.service.JpaServiceException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -11,7 +12,8 @@ class RestApiV1Advise {
     data class NoEntityBody(
         val message: String,
         val id: String,
-        val entity: String
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        val entity: String? = null
     )
 
     @ExceptionHandler(JpaServiceException.NoEntityWithId::class)

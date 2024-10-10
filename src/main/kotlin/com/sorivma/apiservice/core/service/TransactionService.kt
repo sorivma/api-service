@@ -13,4 +13,5 @@ interface TransactionService {
     fun getTransactions(pageable: Pageable): Page<TransactionDTO>
     fun getTransactions(userId: UUID, pageable: Pageable): Page<TransactionDTO>
     fun getIncomingTransactions(userId: UUID, pageable: Pageable): Page<TransactionDTO>
+    fun getAnyTransactions(userId: UUID, pageable: Pageable): Page<TransactionDTO>
 }

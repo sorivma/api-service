@@ -4,7 +4,12 @@ import com.sorivma.apiservice.core.service.JpaServiceException.ExceptionExtensio
 import java.util.*
 
 abstract class BaseJpaService {
-    abstract val entity: String
+    open val entity: String? = null
 
-    fun <I, T> Optional<T>.required(id: I) = this.requiredEntity(id, entity)
+    fun <I, T> Optional<T>.required(id: I): T {
+        entity?.let {
+            return this.requiredEntity(id, it)
+        }
+        return this.requiredEntity(id)
+    }
 }
