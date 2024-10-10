@@ -1,12 +1,14 @@
 package com.sorivma.apiservice.core.service
 
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
-import java.util.*
+import com.sorivma.apiservice.core.model.dto.AccountDTO
+import com.sorivma.apiservice.core.model.dto.TransactionDTO
+import com.sorivma.apiservice.core.model.dto.UserDTO
+import java.util.UUID
 
 interface UserAggregateService {
-    fun getUserAggregate(userId: UUID, pageable: Pageable): UserAggregate
-    fun getUserAggregate(pageable: Pageable): Page<UserAggregate>
-    fun getPayerAggregate(userId: UUID, pageable: Pageable): UserAggregate
-    fun getPayeeAggregate(userId: UUID, pageable: Pageable): UserAggregate
+    fun getUserById(userId: UUID): UserDTO
+    fun getUsers(): List<UserDTO>
+    fun getIncomingTransactions(userId: UUID): List<TransactionDTO>
+    fun getOutcomingTransactions(userId: UUID): List<TransactionDTO>
+    fun getUserAccount(userId: UUID): AccountDTO
 }

@@ -16,4 +16,6 @@ interface TransactionRepository : JpaRepository<Transaction, UUID> {
         SELECT Transaction FROM Transaction t WHERE t.payee.id = :id OR t.payer.id = :id 
     """)
     fun getAnyTransaction(id: UUID, pageable: Pageable): Page<Transaction>
+    fun getTransactionByPayerId(payerId: UUID): List<Transaction>
+    fun getTransactionsByPayeeId(payeeId: UUID): List<Transaction>
 }

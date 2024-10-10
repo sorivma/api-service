@@ -1,38 +1,39 @@
-input Pageable {
-    page: Int!
-    size: Int!
-}
-
+# Main query type for fetching users and their details
 type Query {
-    user(userId: String!): UserAggregate
-    users(page: Pageable): [UserAggregate]
+    user(userId: ID!): UserAggregate
+    users: [UserAggregate]
 }
 
+# UserAggregate represents a user with their transactions and account details
 type UserAggregate {
     id: ID!
     name: String!
     email: String!
-    transactions(page: Pageable, paymentType: PaymentType): [Transaction]
+    incomingTransactions: [Transaction]
+    outcomingTransactions: [Transaction]
     account: Account
 }
 
+# Type for individual transactions
 type Transaction {
     id: ID!
     amount: Float!
     status: TransactionStatus
-    payerId: String!
-    payeeId: String!
+    payerId: ID!
+    payeeId: ID!
     paymentMethod: PaymentMethod!
 }
 
+# Type for a user’s account
 type Account {
-    userId: String!
+    userId: ID!
     balance: Float!
     status: AccountStatus!
     accountType: AccountType!
     currencyCode: String!
 }
 
+# Enums representing the status of transactions and accounts
 enum TransactionStatus {
     PENDING
     COMPLETED
@@ -54,7 +55,13 @@ enum PaymentMethod {
     PAYPAL
 }
 
-enum PaymentType {
-    INCOMING,
-    OUTCOMING
+# Input types for creating and updating users
+input CreateUserInput {
+    name: String!
+    email: String!
+}
+
+input UpdateUserInput {
+    name: String
+    email: String
 }
