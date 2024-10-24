@@ -4,6 +4,34 @@ type Query {
     users: [UserAggregate]
 }
 
+# Mutation type for creating and updating
+type Mutation {
+    createUser(input: CreateUserInput!): UserAggregate
+    addIncomingTransaction(userId: String!, transactionInput: IncomingTransactionInput!): UserAggregate
+    addOutcomingTransaction(userId: String!, transactionInput: OutgoingTransactionInput!): UserAggregate
+}
+
+input CreateUserInput {
+    name: String!
+    email: String!
+    currencyCode: String!
+    accountType: AccountType!
+}
+
+input IncomingTransactionInput {
+    amount: Float!
+    status: TransactionStatus
+    payeeId: String!
+    paymentMethod: PaymentMethod!
+}
+
+input OutgoingTransactionInput {
+    amount: Float!
+    status: TransactionStatus
+    payeeId: String!  # The recipient of the transaction
+    paymentMethod: PaymentMethod!
+}
+
 # UserAggregate represents a user with their transactions and account details
 type UserAggregate {
     id: ID!
@@ -53,15 +81,4 @@ enum PaymentMethod {
     CREDIT_CARD
     BANK_TRANSFER
     PAYPAL
-}
-
-# Input types for creating and updating users
-input CreateUserInput {
-    name: String!
-    email: String!
-}
-
-input UpdateUserInput {
-    name: String
-    email: String
 }

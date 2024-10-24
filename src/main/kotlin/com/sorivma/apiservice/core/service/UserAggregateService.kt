@@ -3,7 +3,7 @@ package com.sorivma.apiservice.core.service
 import com.sorivma.apiservice.core.model.dto.AccountDTO
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
 import com.sorivma.apiservice.core.model.dto.UserDTO
-import java.util.UUID
+import java.util.*
 
 interface UserAggregateService {
     fun getUserById(userId: UUID): UserDTO

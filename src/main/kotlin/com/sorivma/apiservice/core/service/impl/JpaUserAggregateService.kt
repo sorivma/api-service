@@ -12,7 +12,9 @@ import com.sorivma.apiservice.core.model.mapper.impl.UserMapper
 import com.sorivma.apiservice.core.repository.AccountRepository
 import com.sorivma.apiservice.core.repository.TransactionRepository
 import com.sorivma.apiservice.core.repository.UserRepository
+import com.sorivma.apiservice.core.service.TransactionService
 import com.sorivma.apiservice.core.service.UserAggregateService
+import com.sorivma.apiservice.core.service.UserService
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -24,9 +26,9 @@ class JpaUserAggregateService(
     private val transactionMapper: TransactionMapper,
     private val userMapper: UserMapper,
     private val accountMapper: AccountMapper,
+    private val userService: UserService,
+    private val transactionService: TransactionService
 ) : UserAggregateService, BaseJpaService() {
-
-    private fun TransactionDTO.toEntity() = transactionMapper.toEntity(this)
     private fun Transaction.toDTO() = transactionMapper.toDTO(this)
     private fun User.toDTO(): UserDTO = userMapper.toDTO(this)
     private fun Account.toDTO(): AccountDTO = accountMapper.toDTO(this)
@@ -51,5 +53,4 @@ class JpaUserAggregateService(
     override fun getUserAccount(userId: UUID): AccountDTO {
         return accountRepository.findById(userId).required(userId).toDTO()
     }
-
 }
