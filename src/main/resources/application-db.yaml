@@ -6,7 +6,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: "local"
   jpa:
     hibernate:
       ddl-auto: create
@@ -49,3 +49,12 @@ spring:
   h2:
     console:
       enabled: true
+---
+spring:
+  config:
+    activate:
+      on-profile: "production"
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
