@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  services:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:56723"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RMQ_PWD}
+    volumes:
+      - ./rabbitmq_data:/var/lib/rabbitmq
