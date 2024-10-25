@@ -1,0 +1,38 @@
+{
+  "rabbit_version": "3.8.0",
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "transaction.direct",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "queues": [
+    {
+      "name": "transaction.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "transaction.direct",
+      "vhost": "/",
+      "destination": "transaction.queue",
+      "destination_type": "queue",
+      "routing_key": "transaction",
+      "arguments": {}
+    }
+  ]
+}

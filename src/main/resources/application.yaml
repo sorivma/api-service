@@ -2,6 +2,8 @@ spring:
   application:
     name: "api-service"
   config:
-    import: classpath:application-db.yaml
+    import:
+      - classpath:application-db.yaml
+      - classpath:application-mb.yaml
 server:
   port: ${SERVER_PORT:8081}

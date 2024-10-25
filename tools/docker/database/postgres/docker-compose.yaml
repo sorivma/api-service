@@ -5,16 +5,11 @@ services:
     image: postgres:latest
     container_name: api-db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: anti-fraud
+      POSTGRES_USER: ${PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_PWD:-postgres}
+      POSTGRES_DB: ${PG_DB:-postgres}
     ports:
       - "5432:5432"
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-    networks:
-      - pg_network
 
-networks:
-  pg_network:
-    driver: bridge
