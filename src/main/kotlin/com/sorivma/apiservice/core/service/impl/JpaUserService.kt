@@ -1,8 +1,6 @@
 package com.sorivma.apiservice.core.service.impl
 
-import com.sorivma.apiservice.core.model.AccountStatus
 import com.sorivma.apiservice.core.model.dto.AccountDTO
-import com.sorivma.apiservice.core.model.dto.RegistrationDto
 import com.sorivma.apiservice.core.model.dto.UserDTO
 import com.sorivma.apiservice.core.model.entity.Account
 import com.sorivma.apiservice.core.model.entity.User
@@ -12,6 +10,8 @@ import com.sorivma.apiservice.core.repository.AccountRepository
 import com.sorivma.apiservice.core.repository.UserRepository
 import com.sorivma.apiservice.core.service.JpaServiceException.ExceptionExtensions.requiredEntity
 import com.sorivma.apiservice.core.service.UserService
+import org.example.antifraudapi.rest.models.AccountStatus
+import org.example.antifraudapi.rest.models.RegistrationRequest
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -37,10 +37,10 @@ class JpaUserService(
     }
 
     @Transactional
-    override fun registerUser(registrationDto: RegistrationDto): UserDTO {
+    override fun registerUser(registrationRequest: RegistrationRequest): UserDTO {
         val user = User(
-            name = registrationDto.name,
-            email = registrationDto.email,
+            name = registrationRequest.name,
+            email = registrationRequest.email,
             transactions = listOf()
         )
 
@@ -50,8 +50,8 @@ class JpaUserService(
                 user = savedUser,
                 balance = DEFAULT_BALANCE,
                 status = DEFAULT_ACCOUNT_STATUS,
-                accountType = registrationDto.accountType,
-                currency = Currency.getInstance(registrationDto.currencyCode)
+                accountType = registrationRequest.accountType,
+                currency = Currency.getInstance(registrationRequest.currencyCode)
             )
         )
 

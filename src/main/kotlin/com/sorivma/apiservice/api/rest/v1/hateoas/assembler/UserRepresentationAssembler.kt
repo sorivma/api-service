@@ -2,8 +2,8 @@ package com.sorivma.apiservice.api.rest.v1.hateoas.assembler
 
 import com.sorivma.apiservice.api.rest.v1.controller.TransactionController
 import com.sorivma.apiservice.api.rest.v1.controller.UserController
-import com.sorivma.apiservice.api.rest.v1.hateoas.model.UserRepresentation
 import com.sorivma.apiservice.core.model.dto.UserDTO
+import org.example.antifraudapi.rest.models.UserRepresentation
 import org.springframework.data.domain.Pageable
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo

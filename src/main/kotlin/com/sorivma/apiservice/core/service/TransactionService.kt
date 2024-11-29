@@ -1,7 +1,7 @@
 package com.sorivma.apiservice.core.service
 
-import com.sorivma.apiservice.core.model.TransactionStatus
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
+import org.example.antifraudapi.rest.models.TransactionStatus
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import java.util.*

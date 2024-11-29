@@ -1,8 +1,8 @@
 package com.sorivma.apiservice.api.rest.v1.hateoas.assembler
 
 import com.sorivma.apiservice.api.rest.v1.controller.UserController
-import com.sorivma.apiservice.api.rest.v1.hateoas.model.AccountRepresentation
 import com.sorivma.apiservice.core.model.dto.AccountDTO
+import org.example.antifraudapi.rest.models.AccountRepresentation
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn

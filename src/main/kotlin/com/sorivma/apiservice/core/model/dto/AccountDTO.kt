@@ -1,7 +1,8 @@
 package com.sorivma.apiservice.core.model.dto
 
-import com.sorivma.apiservice.core.model.AccountStatus
-import com.sorivma.apiservice.core.model.AccountType
+import org.example.antifraudapi.rest.models.AccountStatus
+import org.example.antifraudapi.rest.models.AccountType
+
 
 data class AccountDTO(
     val userId: String,

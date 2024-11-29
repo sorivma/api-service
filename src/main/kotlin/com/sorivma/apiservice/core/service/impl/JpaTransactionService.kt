@@ -1,6 +1,5 @@
 package com.sorivma.apiservice.core.service.impl
 
-import com.sorivma.apiservice.core.model.TransactionStatus
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
 import com.sorivma.apiservice.core.model.dto.TransactionMessageDTO
 import com.sorivma.apiservice.core.model.entity.Transaction
@@ -12,6 +11,7 @@ import com.sorivma.apiservice.core.service.TransactionService
 import com.sorivma.apiservice.core.service.UserService
 import com.sorivma.apiservice.util.extensions.DtoExtensions.toUUID
 import jakarta.transaction.Transactional
+import org.example.antifraudapi.rest.models.TransactionStatus
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

@@ -7,12 +7,12 @@ import com.sorivma.apiservice.api.graphql.dto.UserAggregate
 import com.sorivma.apiservice.api.graphql.dto.toDTO
 import com.sorivma.apiservice.core.exception.BaseException
 import com.sorivma.apiservice.core.model.dto.AccountDTO
-import com.sorivma.apiservice.core.model.dto.RegistrationDto
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
 import com.sorivma.apiservice.core.service.TransactionService
 import com.sorivma.apiservice.core.service.UserAggregateService
 import com.sorivma.apiservice.core.service.UserService
 import com.sorivma.apiservice.util.extensions.DtoExtensions.toUUID
+import org.example.antifraudapi.rest.models.RegistrationRequest
 
 @DgsComponent
 class UserDataFetcher(
@@ -57,7 +57,7 @@ class UserDataFetcher(
     }
 
     @DgsMutation
-    fun createUser(input: RegistrationDto): UserAggregate {
+    fun createUser(input: RegistrationRequest): UserAggregate {
         return UserAggregate(userService.registerUser(input))
     }
 

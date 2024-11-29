@@ -1,7 +1,8 @@
 package com.sorivma.apiservice.core.model.dto
 
-import com.sorivma.apiservice.core.model.PaymentMethod
-import com.sorivma.apiservice.core.model.TransactionStatus
+import org.example.antifraudapi.rest.models.PaymentMethod
+import org.example.antifraudapi.rest.models.TransactionStatus
+
 
 data class TransactionDTO (
     val id: String? = null,

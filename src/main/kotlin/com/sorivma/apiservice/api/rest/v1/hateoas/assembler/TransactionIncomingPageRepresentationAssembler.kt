@@ -1,9 +1,9 @@
 package com.sorivma.apiservice.api.rest.v1.hateoas.assembler
 
 import com.sorivma.apiservice.api.rest.v1.controller.TransactionController
-import com.sorivma.apiservice.api.rest.v1.hateoas.model.TransactionRepresentation
 import com.sorivma.apiservice.api.rest.v1.hateoas.util.Models
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
+import org.example.antifraudapi.rest.models.TransactionRepresentation
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.hateoas.PagedModel

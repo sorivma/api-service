@@ -17,6 +17,7 @@ java {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencyManagement {
@@ -26,6 +27,7 @@ dependencyManagement {
 }
 
 dependencies {
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
     implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
@@ -40,6 +42,8 @@ dependencies {
     implementation("net.datafaker:datafaker:1.5.0")
 
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
+
+    implementation("org.example:antifraud-api:0.0.1-SNAPSHOT")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

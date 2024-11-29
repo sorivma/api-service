@@ -1,8 +1,8 @@
 package com.sorivma.apiservice.core.model.entity
 
-import com.sorivma.apiservice.core.model.AccountStatus
-import com.sorivma.apiservice.core.model.AccountType
 import jakarta.persistence.*
+import org.example.antifraudapi.rest.models.AccountStatus
+import org.example.antifraudapi.rest.models.AccountType
 import java.util.*
 
 @Entity

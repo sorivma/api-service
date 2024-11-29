@@ -1,8 +1,8 @@
 package com.sorivma.apiservice.api.graphql.dto
 
-import com.sorivma.apiservice.core.model.PaymentMethod
-import com.sorivma.apiservice.core.model.TransactionStatus
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
+import org.example.antifraudapi.rest.models.PaymentMethod
+import org.example.antifraudapi.rest.models.TransactionStatus
 
 data class IncomingTransactionInput(
     val amount: Double,

@@ -2,6 +2,7 @@ package com.sorivma.apiservice.core.service
 
 import com.sorivma.apiservice.core.exception.BaseException
 import com.sorivma.apiservice.util.extensions.OptionalExtensions.requiredValue
+import org.example.antifraudapi.rest.exceiption.EntityNotFoundException
 import java.util.*
 
 open class JpaServiceException(
@@ -12,14 +13,14 @@ open class JpaServiceException(
         get() = "JPA Service exception: "
 
     class NoEntityWithId(
-        message: String? = null,
+        override val message: String? = null,
         cause: Throwable? = null,
-        val entity: String?,
-        val id: String
-        ) : JpaServiceException(message, cause)
+        override val entity: String?,
+        override val id: String
+        ) : JpaServiceException(message, cause), EntityNotFoundException
 
     companion object {
-        fun <I> noEntityWithId(id: I, entity: String): NoEntityWithId {
+        fun noEntityWithId(id: Any?, entity: String): NoEntityWithId {
             return NoEntityWithId(
                 "No entity [${entity}] with specified id [$id]",
                 entity = entity,

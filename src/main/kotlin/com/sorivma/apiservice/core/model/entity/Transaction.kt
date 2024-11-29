@@ -1,8 +1,8 @@
 package com.sorivma.apiservice.core.model.entity
 
-import com.sorivma.apiservice.core.model.PaymentMethod
-import com.sorivma.apiservice.core.model.TransactionStatus
 import jakarta.persistence.*
+import org.example.antifraudapi.rest.models.PaymentMethod
+import org.example.antifraudapi.rest.models.TransactionStatus
 
 @Entity
 @Table(name = "api_transactions")

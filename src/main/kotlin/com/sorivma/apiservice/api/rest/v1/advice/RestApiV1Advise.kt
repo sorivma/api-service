@@ -1,29 +1,24 @@
 package com.sorivma.apiservice.api.rest.v1.advice
 
-import com.fasterxml.jackson.annotation.JsonInclude
+import NoEntityResponse
 import com.sorivma.apiservice.core.service.JpaServiceException
+import org.example.antifraudapi.rest.exceiption.AntifraudApiAdvise
+import org.example.antifraudapi.rest.exceiption.EntityNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 
 @ControllerAdvice(basePackages = ["com.sorivma.apiservice.api.rest.v1.controller"])
-class RestApiV1Advise {
-    data class NoEntityBody(
-        val message: String,
-        val id: String,
-        @JsonInclude(JsonInclude.Include.NON_NULL)
-        val entity: String? = null
-    )
-
+class RestApiV1Advise: AntifraudApiAdvise {
     @ExceptionHandler(JpaServiceException.NoEntityWithId::class)
-    fun handleNoEntityAdvice(ex: JpaServiceException.NoEntityWithId): ResponseEntity<NoEntityBody> {
-        val body = NoEntityBody(
-            message = ex.message.toString(),
-            id = ex.id,
-            entity = ex.entity
+    override fun handleNoEntityAdvice(exception: EntityNotFoundException): ResponseEntity<NoEntityResponse> {
+        val body = NoEntityResponse(
+            message = exception.message ?: "Could not find entity",
+            id = exception.id,
+            entity = exception.entity
         )
 
-        return ResponseEntity<NoEntityBody>(body, HttpStatus.OK)
+        return ResponseEntity<NoEntityResponse>(body, HttpStatus.NOT_FOUND)
     }
 }
