@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable
 import java.util.*
 
 interface TransactionService {
-    fun createTransaction(transactionDTO: TransactionDTO): TransactionDTO
+    fun createTransaction(transaction: TransactionDTO): TransactionDTO
     fun updateTransactionStatus(transactionId: UUID, status: TransactionStatus)
     fun getTransaction(transactionId: UUID): TransactionDTO
     fun getTransactions(pageable: Pageable): Page<TransactionDTO>

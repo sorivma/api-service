@@ -29,7 +29,7 @@ class UserRepresentationAssembler : RepresentationModelAssemblerSupport<UserDTO,
 
         representation.add(
             linkTo(
-                methodOn(TransactionController::class.java).getIncomingTransactions(
+                methodOn(TransactionController::class.java).getIncomeTransactions(
                     UUID.fromString(entity.id),
                     Pageable.unpaged()
                 )
@@ -38,7 +38,7 @@ class UserRepresentationAssembler : RepresentationModelAssemblerSupport<UserDTO,
 
         representation.add(
             linkTo(
-                methodOn(TransactionController::class.java).getOutcomingTransactions(
+                methodOn(TransactionController::class.java).getOutcomeTransactions(
                     UUID.fromString(entity.id),
                     Pageable.unpaged()
                 )

@@ -5,11 +5,11 @@ import com.sorivma.apiservice.core.model.dto.TransactionMessageDTO
 import com.sorivma.apiservice.core.model.entity.Transaction
 import com.sorivma.apiservice.core.model.mapper.impl.TransactionMapper
 import com.sorivma.apiservice.core.repository.TransactionRepository
-import com.sorivma.apiservice.core.service.JpaServiceException.ExceptionExtensions.requiredEntity
 import com.sorivma.apiservice.core.service.TransactionSenderService
 import com.sorivma.apiservice.core.service.TransactionService
 import com.sorivma.apiservice.core.service.UserService
 import com.sorivma.apiservice.util.extensions.DtoExtensions.toUUID
+import com.sorivma.apiservice.util.extensions.OptionalExtensions.requiredEntity
 import jakarta.transaction.Transactional
 import org.example.antifraudapi.rest.models.TransactionStatus
 import org.springframework.data.domain.Page
@@ -51,14 +51,14 @@ class JpaTransactionService(
     override fun updateTransactionStatus(transactionId: UUID, status: TransactionStatus) {
         transactionRepository.save(
             transactionRepository.findById(transactionId)
-                .requiredEntity(transactionId, ENTITY)
+                .requiredEntity(transactionId.toString(), ENTITY)
                 .copy(status = status)
         )
     }
 
     override fun getTransaction(transactionId: UUID): TransactionDTO {
         return transactionRepository.findById(transactionId)
-            .requiredEntity(transactionId, ENTITY).toDTO()
+            .requiredEntity(transactionId.toString(), ENTITY).toDTO()
     }
 
     override fun getTransactions(pageable: Pageable): Page<TransactionDTO> {

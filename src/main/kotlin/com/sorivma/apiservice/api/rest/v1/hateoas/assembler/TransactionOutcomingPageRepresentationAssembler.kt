@@ -24,7 +24,7 @@ class TransactionOutcomingPageRepresentationAssembler(
         val representations = entity.map { transactionAssembler.toModel(it) }
 
         return Models.pagedModel(
-            methodOn(TransactionController::class.java).getOutcomingTransactions(
+            methodOn(TransactionController::class.java).getOutcomeTransactions(
                 UUID.fromString(entity.content.first().payeeId),
                 Pageable.unpaged()),
             representations,

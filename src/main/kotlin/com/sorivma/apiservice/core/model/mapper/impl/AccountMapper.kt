@@ -1,11 +1,11 @@
 package com.sorivma.apiservice.core.model.mapper.impl
 
-import com.sorivma.apiservice.core.exception.BaseException
 import com.sorivma.apiservice.core.model.dto.AccountDTO
 import com.sorivma.apiservice.core.model.entity.Account
 import com.sorivma.apiservice.core.model.mapper.Mapper
 import com.sorivma.apiservice.core.repository.UserRepository
 import com.sorivma.apiservice.util.extensions.OptionalExtensions.requiredValue
+import org.example.antifraudapi.rest.exceiption.ResourceNotFoundException
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -25,7 +25,10 @@ class AccountMapper(
 
     override fun toEntity(dto: AccountDTO): Account {
         return Account(
-            user = userRepository.findById(UUID.fromString(dto.userId)).requiredValue(BaseException.default("")),
+            user = userRepository.findById(UUID.fromString(dto.userId)).requiredValue(ResourceNotFoundException(
+                entity = "User",
+                id = dto.userId
+            )),
             balance = dto.balance,
             status = dto.status,
             accountType = dto.accountType,

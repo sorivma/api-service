@@ -8,8 +8,9 @@ import com.sorivma.apiservice.core.model.mapper.impl.AccountMapper
 import com.sorivma.apiservice.core.model.mapper.impl.UserMapper
 import com.sorivma.apiservice.core.repository.AccountRepository
 import com.sorivma.apiservice.core.repository.UserRepository
-import com.sorivma.apiservice.core.service.JpaServiceException.ExceptionExtensions.requiredEntity
 import com.sorivma.apiservice.core.service.UserService
+import com.sorivma.apiservice.util.extensions.OptionalExtensions.required
+import com.sorivma.apiservice.util.extensions.OptionalExtensions.requiredEntity
 import org.example.antifraudapi.rest.models.AccountStatus
 import org.example.antifraudapi.rest.models.RegistrationRequest
 import org.springframework.data.domain.Page
@@ -24,11 +25,8 @@ class JpaUserService(
     private val accountRepository: AccountRepository,
     private val userMapper: UserMapper,
     private val accountMapper: AccountMapper
-) : UserService, BaseJpaService() {
-
-    override val entity: String
-        get() = "User"
-
+) : UserService {
+    
     fun User.toDTO(): UserDTO = userMapper.toDTO(this)
     fun Account.toDTO(): AccountDTO = accountMapper.toDTO(this)
 
@@ -59,17 +57,17 @@ class JpaUserService(
     }
 
     override fun getUser(id: UUID): UserDTO {
-        return userRepository.findById(id).required(id).toDTO()
+        return userRepository.findById(id).required(id.toString()).toDTO()
     }
 
     override fun getUserAccount(id: UUID): AccountDTO {
         return accountRepository
-            .findById(id).requiredEntity(id, ACCOUNT).toDTO()
+            .findById(id).requiredEntity(id.toString(), ACCOUNT).toDTO()
     }
 
     override fun changeAccountStatus(userId: UUID, accountStatus: AccountStatus) {
         accountRepository.save(
-            accountRepository.findById(userId).requiredEntity(userId, ACCOUNT).copy(status = accountStatus)
+            accountRepository.findById(userId).requiredEntity(userId.toString(), ACCOUNT).copy(status = accountStatus)
         )
     }
 

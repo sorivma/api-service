@@ -5,13 +5,13 @@ import com.sorivma.apiservice.api.graphql.dto.IncomingTransactionInput
 import com.sorivma.apiservice.api.graphql.dto.OutgoingTransactionInput
 import com.sorivma.apiservice.api.graphql.dto.UserAggregate
 import com.sorivma.apiservice.api.graphql.dto.toDTO
-import com.sorivma.apiservice.core.exception.BaseException
 import com.sorivma.apiservice.core.model.dto.AccountDTO
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
 import com.sorivma.apiservice.core.service.TransactionService
 import com.sorivma.apiservice.core.service.UserAggregateService
 import com.sorivma.apiservice.core.service.UserService
 import com.sorivma.apiservice.util.extensions.DtoExtensions.toUUID
+import jakarta.validation.ConstraintViolationException
 import org.example.antifraudapi.rest.models.RegistrationRequest
 
 @DgsComponent
@@ -53,7 +53,7 @@ class UserDataFetcher(
         val user = dfe.getSource<UserAggregate>()
         return user?.let {
             userAggregateService.getUserAccount(user.id.toUUID())
-        } ?: throw BaseException.default("Invalid user state [user got no account]")
+        } ?: throw IllegalStateException("Invalid user state [user got no account]")
     }
 
     @DgsMutation

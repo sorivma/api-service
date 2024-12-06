@@ -28,7 +28,7 @@ class TransactionIncomingPageRepresentationAssembler(
         }
 
         return Models.pagedModel(
-            methodOn(TransactionController::class.java).getIncomingTransactions(
+            methodOn(TransactionController::class.java).getIncomeTransactions(
                 UUID.fromString(entity.content.first().payerId),
                 Pageable.unpaged()
             ),

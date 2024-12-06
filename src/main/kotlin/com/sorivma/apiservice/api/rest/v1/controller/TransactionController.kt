@@ -7,6 +7,9 @@ import com.sorivma.apiservice.api.rest.v1.hateoas.assembler.TransactionPageRepre
 import com.sorivma.apiservice.api.rest.v1.hateoas.assembler.TransactionRepresentationAssembler
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
 import com.sorivma.apiservice.core.service.TransactionService
+import org.example.antifraudapi.rest.controllers.TransactionController
+import org.example.antifraudapi.rest.models.PaymentMethod
+import org.example.antifraudapi.rest.models.TransactionCreationRequest
 import org.example.antifraudapi.rest.models.TransactionRepresentation
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -22,19 +25,19 @@ class TransactionController(
     private val transactionPageOutcomingAssembler: TransactionOutcomingPageRepresentationAssembler,
     private val transactionPageAssembler: TransactionPageRepresentationAssembler,
     private val transactionAssembler: TransactionRepresentationAssembler
-) {
+): TransactionController {
     @GetMapping("/all")
-    fun getTransactions(@PageableDefault pageable: Pageable): PagedModel<TransactionRepresentation> {
+    override fun getTransactions(@PageableDefault pageable: Pageable): PagedModel<TransactionRepresentation> {
         return transactionPageAssembler.toModel(transactionService.getTransactions(pageable))
     }
 
     @GetMapping("/{transactionId}")
-    fun getTransaction(@PathVariable transactionId: UUID): TransactionRepresentation {
+    override fun getTransaction(@PathVariable transactionId: UUID): TransactionRepresentation {
         return transactionAssembler.toModel(transactionService.getTransaction(transactionId))
     }
 
     @GetMapping("/incoming/{userId}")
-    fun getIncomingTransactions(
+    override fun getIncomeTransactions(
         @PathVariable userId: UUID,
         @PageableDefault pageable: Pageable
     ): PagedModel<TransactionRepresentation> {
@@ -42,7 +45,7 @@ class TransactionController(
     }
 
     @GetMapping("/outcoming/{userId}")
-    fun getOutcomingTransactions(
+    override fun getOutcomeTransactions(
         @PathVariable userId: UUID,
         @PageableDefault pageable: Pageable
     ): PagedModel<TransactionRepresentation> {
@@ -50,9 +53,20 @@ class TransactionController(
     }
 
     @PostMapping("/create")
-    fun createTransaction(@RequestBody transactionDTO: TransactionDTO) {
-        transactionService.createTransaction(
-            transactionDTO
+    override fun createTransaction(@RequestBody transaction: TransactionCreationRequest): TransactionRepresentation {
+        return transactionAssembler.toModel(
+            transactionService.createTransaction(
+                transaction.toDto()
+            )
+        )
+    }
+
+    fun TransactionCreationRequest.toDto(): TransactionDTO {
+        return TransactionDTO(
+            payeeId = this.payeeId,
+            payerId = this.payerId,
+            paymentMethod = this.paymentMethod,
+            amount = this.amount
         )
     }
 }
