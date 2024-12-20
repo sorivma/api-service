@@ -8,7 +8,6 @@ import com.sorivma.apiservice.api.rest.v1.hateoas.assembler.TransactionRepresent
 import com.sorivma.apiservice.core.model.dto.TransactionDTO
 import com.sorivma.apiservice.core.service.TransactionService
 import org.example.antifraudapi.rest.controllers.TransactionController
-import org.example.antifraudapi.rest.models.PaymentMethod
 import org.example.antifraudapi.rest.models.TransactionCreationRequest
 import org.example.antifraudapi.rest.models.TransactionRepresentation
 import org.springframework.data.domain.Pageable

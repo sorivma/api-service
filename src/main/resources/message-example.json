@@ -1,0 +1,21 @@
+{
+  "payer": {
+    "id": "3a389806-3f00-43dd-8843-627f058568f3",
+    "name": "John Doe",
+    "email": "johnDoe@missing.com"
+  },
+  "payee": {
+    "id": "69a8a2a3-11aa-4e47-8d89-34d5c74285aa",
+    "name": "Jane Doe",
+    "email": "janeDoe@missing.com"
+  },
+  "transaction": {
+    "id": "b1b9b1b9-1b1b-1b1b-1b1b-1b1b1b1b1b1b",
+    "amount": 100.00,
+    "currency": "USD",
+    "status": "PENDING",
+    "payerId": "3a389806-3f00-43dd-8843-627f058568f3",
+    "payeeId": "69a8a2a3-11aa-4e47-8d89-34d5c74285aa",
+    "paymentMethod": "QIWI"
+  }
+}

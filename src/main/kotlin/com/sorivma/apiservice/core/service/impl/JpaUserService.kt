@@ -26,7 +26,7 @@ class JpaUserService(
     private val userMapper: UserMapper,
     private val accountMapper: AccountMapper
 ) : UserService {
-    
+
     fun User.toDTO(): UserDTO = userMapper.toDTO(this)
     fun Account.toDTO(): AccountDTO = accountMapper.toDTO(this)
 

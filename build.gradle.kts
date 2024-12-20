@@ -29,11 +29,12 @@ repositories {
         url = uri("http://91.210.170.21:8085/repository/maven-snapshots")
         isAllowInsecureProtocol = true
         credentials {
-            username = System.getenv("NEXUS_USERNAME")
-            password = System.getenv("NEXUS_PASSWORD")
+            username = "sorivma"
+            password = "shc158111n12"
         }
     }
     mavenCentral()
+    mavenLocal()
 }
 
 dependencyManagement {
@@ -95,16 +96,16 @@ publishing {
             version = "${project.version}"
         }
     }
-    repositories {
-        maven {
-            name = "nexus"
-            url = uri("http://91.210.170.21:8085/repository/maven-snapshots")
-            isAllowInsecureProtocol = true
-            credentials {
-                username = System.getenv("NEXUS_USERNAME")
-                password = System.getenv("NEXUS_PASSWORD")
-            }
-        }
-    }
+//    repositories {
+//        maven {
+//            name = "nexus"
+//            url = uri("http://91.210.170.21:8085/repository/maven-snapshots")
+//            isAllowInsecureProtocol = true
+//            credentials {
+//                username = System.getenv("NEXUS_USERNAME")
+//                password = System.getenv("NEXUS_PASSWORD")
+//            }
+//        }
+//    }
 }
 
